@@ -1,48 +1,46 @@
 #include <iostream>
 #include <vector>
 #include <string>
-using namespace std;
-
 
 //criacao da classe Aluno
 class Aluno {
 public:
 	//construtor
-	Aluno(string nome, float media) :
+	Aluno(std::string nome, float media) :
 		nome(nome), media(media) {
 	}
 
-	string nome;
+	std::string nome;
 	float media;
 
 	void verNaLista() {
-		cout << "Nome: " << nome << " - Media: " << media << endl;
+		std::cout << "Nome: " << nome << " - Media: " << media << std::endl;
 	}
 };
 
 //Criacao do vector para armazenar os objetos dos alunos
-vector<Aluno> listaAlunos;
+std::vector<Aluno> listaAlunos;
 
 //criacao das funcoes
 void adicionar() {
 
-	string nome;
+	std::string nome;
 	int numNotas;
 	float media;
 
 	// Pegar do utilizador os atributos dos alunos
-	cout << "Nome: ";
-	getline(cin, nome);
+	std::cout << "Nome: ";
+	std::getline(std::cin, nome);
 
-	cout << "Quantas notas deseja adicionar? ";
-	cin >> numNotas;
+	std::cout << "Quantas notas deseja adicionar? ";
+	std::cin >> numNotas;
 
 	// Calcular a media das notas
 	float soma = 0;
 	for (int i = 1; i <= numNotas; i++) {
 		float nota;
-		cout << "Nota: ";
-		cin >> nota;
+		std::cout << "Nota: ";
+		std::cin >> nota;
 		soma += nota;
 	}
 	media = soma / numNotas;
@@ -51,77 +49,83 @@ void adicionar() {
 
 	listaAlunos.emplace_back(nome, media);
 
-	cout << "Media do aluno: " << media << endl;
-	cout << "\n";
-	cout << "Aluno adicionado a lista" << endl;
-	cout << "\n";
+	std::cout << "Media do aluno: " << media << std::endl;
+	std::cout << "\n";
+	std::cout << "Aluno adicionado a lista" << std::endl;
+	std::cout << "\n";
 }
 void listar() {
-	cout << "\n";
-	cout << "Lista de alunos: " << endl;
-	for (auto aluno : listaAlunos) {
-		aluno.verNaLista();
+	std::cout << "\n";
+
+	if (listaAlunos.size() == 0) {
+		std::cout << "Nao existem alunos cadastrados\n\n";
 	}
-	cout << "\n";
+	else {
+		std::cout << "Lista de alunos: " << std::endl;
+		for (auto aluno : listaAlunos) {
+			aluno.verNaLista();
+		}
+		std::cout << "\n";
+	}
 }
 void remover() {
-	string nome;
-	cout << "\n";
-	cout << "Nome do aluno que deseja remover: ";
-	getline(cin, nome);
+	std::string nome;
+	std::cout << "\n";
+	std::cout << "Nome do aluno que deseja remover: ";
+	std::getline(std::cin, nome);
 
 	auto it = listaAlunos.begin();
 	while (it != listaAlunos.end()) {
 		if (it->nome == nome) {
 			listaAlunos.erase(it);
-			cout << "\n";
-			cout << "Aluno removido" << endl;
-			cout << "\n";
+			std::cout << "\n";
+			std::cout << "Aluno removido" << std::endl;
+			std::cout << "\n";
 			return;
 		}
 		else {
 			++it;
 		}
 	}
-	cout << "\n";
-	cout << "Aluno nao encontrado" << endl;
-	cout << "\n";
+	std::cout << "\n";
+	std::cout << "Aluno nao encontrado" << std::endl;
+	std::cout << "\n";
 }
 void editar() {
-	string nome;
-	cout << "Digite o nome do aluno que deseja editar: ";
-	getline(cin, nome);
+	std::string nome;
+	std::cout << "Digite o nome do aluno que deseja editar: ";
+	std::getline(std::cin, nome);
 
 	auto it = listaAlunos.begin();
 	while (it != listaAlunos.end()) {
 		if (it->nome == nome) {
 
 			int numNotas;
-			cout << "\n";
-			cout << "Quantas notas deseja por? ";
-			cin >> numNotas;
+			std::cout << "\n";
+			std::cout << "Quantas notas deseja por? ";
+			std::cin >> numNotas;
 
 			// Calcular a media das notas
 			float soma = 0;
 			for (int i = 1; i <= numNotas; i++) {
 				float nota;
-				cout << "Nota: ";
-				cin >> nota;
+				std::cout << "Nota: ";
+				std::cin >> nota;
 				soma += nota;
 			}
 			it->media = soma / numNotas;
-			cout << "\n";
-			cout << "Nova media: " << it->media << endl;
-			cout << "\n";
+			std::cout << "\n";
+			std::cout << "Nova media: " << it->media << std::endl;
+			std::cout << "\n";
 			return;
 		}
 		else {
 			++it;
 		}
 	}
-	cout << "\n";
-	cout << "Aluno nao encontrado";
-	cout << "\n";
+	std::cout << "\n";
+	std::cout << "Aluno nao encontrado";
+	std::cout << "\n";
 
 }
 
@@ -129,16 +133,16 @@ void editar() {
 int main() {
 	while (true) {
 		int escolha;
-		cout << "Escolha uma das opcoes:" << endl;
-		cout << "1: Adicionar um aluno" << endl;
-		cout << "2: Remover um aluno" << endl;
-		cout << "3: Editar as notas de um aluno" << endl;
-		cout << "4: Mostrar lista de alunos" << endl;
-		cout << "5: Encerrar o programa" << endl;
-		cout << "Escolha a opcao(1, 2, 3, 4 ou 5): ";
-		cin >> escolha;
-		cout << "\n";
-		cin.ignore();
+		std::cout << "Escolha uma das opcoes:" << std::endl;
+		std::cout << "1: Adicionar um aluno" << std::endl;
+		std::cout << "2: Remover um aluno" << std::endl;
+		std::cout << "3: Editar as notas de um aluno" << std::endl;
+		std::cout << "4: Mostrar lista de alunos" << std::endl;
+		std::cout << "5: Encerrar o programa" << std::endl;
+		std::cout << "Escolha a opcao(1, 2, 3, 4 ou 5): ";
+		std::cin >> escolha;
+		std::cout << "\n";
+		std::cin.ignore();
 
 		switch (escolha) {
 		case 1:
@@ -154,10 +158,10 @@ int main() {
 			listar();
 			break;
 		case 5:
-			cout << "Programa encerrado.";
+			std::cout << "Programa encerrado.";
 			return 0;
 		default:
-			cout << "\nOpcao invalida. Por favor, escolha 1, 2 ou 3.\n" << endl;
+			std::cout << "\nOpcao invalida. Por favor, escolha 1, 2 ou 3.\n" << std::endl;
 		}
 	}
 	return 0;
